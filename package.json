@@ -12,7 +12,7 @@
     "deploy:before": "build",
     "build:before": "build",
     "run:before": "build",
-    "dev": "ionic-app-scripts build --dev && cordova run android --device"
+    "device": "ionic-app-scripts build --dev && cordova run android --device"
   },
   "dependencies": {
     "ionic-angular": "^2.0.0-rc.0",
