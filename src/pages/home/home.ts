@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+import { NavController } from 'ionic-angular';
+
+import { ModalPage } from '../modal/modal';
+
 declare var plugin: any;
 
 @Component({
@@ -8,7 +12,7 @@ declare var plugin: any;
 })
 export class HomePage {
 
-  constructor() {
+  constructor(public navCtrl: NavController) {
   }
 
   ngAfterViewInit() {
@@ -36,7 +40,30 @@ export class HomePage {
       }
     });
     map.one(plugin.google.maps.event.MAP_READY, () => {
-      console.log("--> map_canvas1 : ready.");
+      map.animateCamera({
+        'target': {
+          'lat': 40.415363,
+          'lng': -3.707398
+        },
+        'zoom': 17,
+        'padding': 0
+      }, () => {
+        map.addMarker({
+          'position': {
+            'lat': 40.415363,
+            'lng': -3.707398
+          },
+          'title': 'click me'
+        }, (marker) => {
+          marker.on(plugin.google.maps.event.MARKER_CLICK, () => {
+            marker.showInfoWindow();
+          });
+
+          marker.on(plugin.google.maps.event.INFO_CLICK, () => {
+            this.navCtrl.push(ModalPage);
+          });
+        });
+      });
     });
   }
 
