@@ -1,19 +1,22 @@
 import { Component } from '@angular/core';
 
+import { NavController } from 'ionic-angular';
+
 declare var plugin: any;
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-modal',
+  templateUrl: 'modal.html'
 })
-export class HomePage {
+export class ModalPage {
 
-  constructor() {
+  constructor(public navCtrl: NavController) {
+
   }
 
   ngAfterViewInit() {
 
-    var div = document.getElementById('map_canvas1');
+    var div = document.getElementById('map_canvas2');
     var map = plugin.google.maps.Map.getMap(div, {
       'controls': {
         'compass': false,
@@ -35,10 +38,9 @@ export class HomePage {
         }
       }
     });
-    map.one(plugin.google.maps.event.MAP_READY, () => {
-      console.log("--> map_canvas1 : ready.");
+    map.one(plugin.google.maps.event.MAP_READY, function() {
+      console.log("--> map_canvas2 : ready.");
     });
   }
-
 
 }
